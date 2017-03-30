@@ -1,0 +1,17 @@
+{
+  "name": "lambda-atlas-create-doc",
+  "version": "1.0.0",
+  "description": "A demo lambda function that creates a document into a MongoDB Atlas database",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mongodb;atlas;aws;lambda"
+  ],
+  "author": "Raphael Londner",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "mongodb": "^2.2.25"
+  }
+}
