@@ -47,15 +47,21 @@ function processEvent(event, context, callback) {
     }
 
     try {
-        if (cachedDb == null) {
-            console.log('=> connecting to database');
-            MongoClient.connect(atlas_connection_uri, function (err, db) {
-                cachedDb = db;
-                return createDoc(db, jsonContents, callback);
-            });
+        //testing if the database connection exists and is connected to Atlas so we can try to re-use it
+        if (cachedDb && cachedDb.serverConfig.isConnected()) {
+            createDoc(cachedDb, jsonContents, callback);
         }
         else {
-            createDoc(cachedDb, jsonContents, callback);
+            //some performance penalty might be incurred when running that database connection initialization code
+            console.log(`=> connecting to database ${atlas_connection_uri}`);
+            MongoClient.connect(atlas_connection_uri, function (err, db) {
+                if (err) {
+                    console.log(`the error is ${err}. Thanks Nick!`, err)
+                    process.exit(1)
+                }
+                cachedDb = db;
+                return createDoc(db, jsonContents, callback);
+            });            
         }
     }
     catch (err) {
@@ -70,10 +76,11 @@ function createDoc(db, json, callback) {
             callback(null, JSON.stringify(err));
         }
         else {
-            console.log("Kudos! You just created an entry into the restaurants collection with id: " + result.insertedId);
-            callback(null, "SUCCESS");
+            var message = `Kudos! You just created an entry into the restaurants collection with id: ${result.insertedId}`;
+            console.log(message);
+            callback(null, message);
         }
-        //we don't need to close the connection thanks to context.callbackWaitsForEmptyEventLoop = false (above)
+        //we don't want to close the connection since we set context.callbackWaitsForEmptyEventLoop to false (see above)
         //this will let our function re-use the connection on the next called (if it can re-use the same Lambda container)
         //db.close();
     });
