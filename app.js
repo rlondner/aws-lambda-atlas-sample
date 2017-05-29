@@ -56,7 +56,7 @@ function processEvent(event, context, callback) {
             console.log(`=> connecting to database ${atlas_connection_uri}`);
             MongoClient.connect(atlas_connection_uri, function (err, db) {
                 if (err) {
-                    console.log(`the error is ${err}. Thanks Nick!`, err)
+                    console.log(`the error is ${err}.`, err)
                     process.exit(1)
                 }
                 cachedDb = db;

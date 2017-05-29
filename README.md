@@ -12,7 +12,7 @@ Note: I included the [zip.sh](https://github.com/raphaellondner-mongodb/lambda-a
 
 We recommend you use the [lambda-local NPM package](https://www.npmjs.com/package/lambda-local) to test your Lambda function locally with your Atlas cluster.
 
-The [ll.sh](https://github.com/raphaellondner-mongodb/lambda-atlas-create-doc/blob/master/ll.sh) script allows you to easily run tests by configuring the following parameters:
+The [ll.sh](https://github.com/rlondner/aws-lambda-atlas-sample/blob/master/ll.sh) script allows you to easily run tests by configuring the following parameters:
 
 ```
 ATLAS_USERNAME="<username>"
