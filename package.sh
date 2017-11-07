@@ -1,0 +1,1 @@
+sam package --template-file sam.yaml --s3-bucket <S3-BUCKET-NAME> --output-template-file packaged.yaml

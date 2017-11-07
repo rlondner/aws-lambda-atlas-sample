@@ -1,0 +1,1 @@
+sam local start-api -d 5858 -t sam.yaml

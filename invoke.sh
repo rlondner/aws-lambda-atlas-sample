@@ -1,0 +1,1 @@
+sam local invoke 'CreateDoc' -e event.json -t sam.yaml

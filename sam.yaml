@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'A Lambda function that creates a document in a MongoDB Atlas database'
+Resources:
+  CreateDoc:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Runtime: nodejs6.10
+      Handler: app.handler
+      FunctionName: CreateDocInAtlas
+      CodeUri: .
+      Timeout: 10
+      Environment:
+        Variables:
+          MONGODB_ATLAS_CLUSTER_URI: 'mongodb://<USERNAME>:<PASSWORD>@freedemo-shard-00-00-pxz6k.mongodb.net:27017,freedemo-shard-00-01-pxz6k.mongodb.net:27017,freedemo-shard-00-02-pxz6k.mongodb.net:27017/travel?ssl=true&replicaSet=FreeDemo-shard-0&authSource=admin'
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /createdoc
+            Method: post

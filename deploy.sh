@@ -1,0 +1,1 @@
+aws cloudformation deploy --template-file packaged.yaml --stack-name Lambda-CreateDoc --capabilities CAPABILITY_IAM --region us-east-1
