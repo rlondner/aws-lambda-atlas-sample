@@ -9,3 +9,5 @@ lambda-local.sh
 
 
 read.js
+package-lock.json
+packaged.yaml

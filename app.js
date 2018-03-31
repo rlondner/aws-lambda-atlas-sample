@@ -54,13 +54,13 @@ function processEvent(event, context, callback) {
         else {
             //some performance penalty might be incurred when running that database connection initialization code
             console.log(`=> connecting to database ${atlas_connection_uri}`);
-            MongoClient.connect(atlas_connection_uri, function (err, db) {
+            MongoClient.connect(atlas_connection_uri, function (err, client) {
                 if (err) {
                     console.log(`the error is ${err}.`, err)
                     process.exit(1)
                 }
-                cachedDb = db;
-                return createDoc(db, jsonContents, callback);
+                cachedDb = client.db('travel');
+                return createDoc(cachedDb, jsonContents, callback);
             });            
         }
     }
